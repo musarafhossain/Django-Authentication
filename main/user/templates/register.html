@@ -7,4 +7,25 @@
 {% block content %}
     <h1>Registration Page...</h1>
     <a href="{% url 'home' %}">Home</a>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {% for fm in form %}
+            {{fm.label_tag}} 
+            {{fm}} <br>
+            <p>
+                {{fm.errors|striptags}}
+            </p>
+        {% endfor %}
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="er">{{error}}</p>
+            {% endfor %}
+        {% endif %}
+        <button type="submit">Submit</button>
+    </form>
+    {% if messages %}
+        {% for message in messages %}
+            <p {% if message.tags %} class="{{message.tags}}" {% endif %}> {{message}} </p>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

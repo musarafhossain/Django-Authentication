@@ -5,6 +5,43 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Login Page...</h1>
-    <a href="{% url 'home' %}">Home</a>
+    <main class="main">
+        <div class="container">
+            <h1 class="">Login Page</h1>
+            <hr>
+            <form action="" method="post" novalidate>
+                {% csrf_token %}
+                {% for fm in form %}
+                    <div>
+                        {{ fm.label_tag }}
+                        {{ fm }}
+                        {% if fm.errors %}
+                            <div class="error">
+                                {{ fm.errors|striptags }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                {% if form.non_field_errors %}
+                    <div class="error">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="link">
+                    <span>Don't have an account?</span>
+                    <a href="{% url 'register' %}">Registration</a>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </main>
 {% endblock %}

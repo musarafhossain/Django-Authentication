@@ -6,13 +6,12 @@
 }
 
 .main{
-    height: 100dvh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 5%;
+    padding: 0 5%;
 }
 
 .main .container{
@@ -24,6 +23,7 @@
     flex-direction: column;
     gap: 15px;
     max-width: 450px;
+    margin: 20px;
 }
 
 .main .container h1{
@@ -76,4 +76,23 @@
 
 .main .container form button:hover{
     background-color: #ff6347;
+}
+
+.error{
+    color: #f00;
+    border: 1px solid #ea7c7c;
+    border-radius: 7px;
+    padding: 10px;
+    font-size: small;
+    background-color: #ffb4a7;
+    margin-bottom: 10px;
+}
+
+.success{
+    color: rgb(0, 88, 0);
+    border: 1px solid #83ea7c;
+    border-radius: 7px;
+    padding: 10px;
+    font-size: small;
+    background-color: #b3ffa7;
 }

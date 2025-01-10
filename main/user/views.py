@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from .forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def home_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     return render(request, 'home.html')
 
 def login_view(request):
@@ -15,7 +17,8 @@ def login_view(request):
         fm = AuthenticationForm(request, request.POST)
         if fm.is_valid():
             username = fm.cleaned_data['username']
-            password = fm.cleaned_data['username']
+            password = fm.cleaned_data['password']
+            print(username, password)
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
@@ -28,6 +31,10 @@ def login_view(request):
     return render(request, 'login.html', {
         'form': fm
     })
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 def register_view(request):
     if request.user.is_authenticated:
@@ -45,4 +52,6 @@ def register_view(request):
     })
 
 def profile_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     return render(request, 'profile.html')

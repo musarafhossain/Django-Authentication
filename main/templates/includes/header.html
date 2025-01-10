@@ -1,0 +1,14 @@
+{% load static %}
+<link rel="stylesheet" href="{% static "css/header.css" %}">
+<header>
+    <div class="logo">
+        <a href="{% url 'home' %}">Django-Authentication</a>
+    </div>
+    <div>
+        <a href="{% url 'profile' %}" class="profile-link">
+            <div class="profile-icon">
+                <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
+            </div>
+        </a>
+    </div>
+</header>
